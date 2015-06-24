@@ -4,20 +4,38 @@ query_drug <- function(drug) {
                drug)
 }
 
+count_fda <- function(variable, ...) {
+
+  dots <- unlist(list(...))
+  validate(
+    need(length(dots) < 5, "Only up to four drugs allowed for now!")
+  )
+
+  do.call(rbind,
+          lapply(dots, FUN = function(input_drug) {
+            tbl_df(
+              query_drug(input_drug) %>%
+                fda_count(variable) %>%
+                fda_exec()
+            ) %>%
+              mutate(drug = input_drug)
+          }))
+}
+
+
 dates_received <- reactive({
   if(is.null(input$drug))
     return()
 
-  d <- query_drug(input$drug) %>%
-    fda_count("receivedate") %>%
-    fda_exec()
+  d <- count_fda(variable = "receivedate",
+                 input$drug)
 
   d <- d %>%
     mutate(time = as.POSIXct(time,
                              format = "%Y%m%d"),
            time = cut.POSIXt(time, 'week',
                              start.on.monday = F)) %>%
-    group_by(time) %>%
+    group_by(drug, time) %>%
     summarise(count = sum(count)) %>%
     mutate(time = as.character(time),
            time = as.POSIXct(time))
@@ -46,9 +64,6 @@ dates_received <- reactive({
 ages <- reactive({
   if(is.null(input$drug))
     return()
-  tbl_df(
-    query_drug(input$drug) %>%
-      fda_count("patient.patientonsetage") %>%
-      fda_exec()
-  )
+  count_fda(variable = "patient.patientonsetage",
+            input$drug)
 })

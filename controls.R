@@ -5,6 +5,7 @@ output$drugs <- renderUI({
                   fda_count("patient.drug.openfda.generic_name") %>%
                   fda_limit(1000) %>%
                   fda_exec()) %>%
-                  arrange(term))$term,
-              selected = "oxycodone")
+                  arrange(term) %>%
+                  filter(nchar(term) > 4))$term,
+              selected = "oxycodone", multiple = T)
 })

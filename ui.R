@@ -5,21 +5,24 @@ shinyUI(fluidPage(
   p(""),
   # http://www.fda.gov/Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/
   sidebarPanel(
-    uiOutput("drugs"),
-    hr(),
-    h4("Graph settings"),
-    checkboxInput("log_scale",
-                  "Log y-axis (can clarify trends)",
-                  value = TRUE)
+    uiOutput("drugs")
   ),
 
   mainPanel(
     plotOutput("ages"),
     plotOutput("reports"),
+    checkboxInput("log_scale",
+                  "Log y-axis (can clarify trends)",
+                  value = TRUE),
     hr(),
     p("Note: reverse sorted by week, recent weeks first"),
-    dataTableOutput("reports_by_week"),
-    dataTableOutput("outcomes"),
-    dataTableOutput("reactions")
+    tabsetPanel(
+      tabPanel("Weekly Reports", br(),
+               dataTableOutput("reports_by_week")),
+      tabPanel("Outcomes", br(),
+               dataTableOutput("outcomes")),
+      tabPanel("Reactions", br(),
+               dataTableOutput("reactions"))
+    )
   )
 ))
