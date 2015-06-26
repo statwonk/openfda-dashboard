@@ -31,8 +31,7 @@ output$reports <- renderPlot({
                                                 angle = 90,
                                                 vjust = 0.5)) +
     ylab("Adverse Events") +
-    xlab("") +
-    ggtitle("Reports per week")
+    xlab("")
 
 
   if(input$log_scale) {
@@ -79,8 +78,8 @@ output$ages <- renderPlot({
     theme_light(base_size = 20) +
     theme_drug_plots(axis.text.x = element_text(size = 15)) +
     ylab("% of reports") +
-    xlab("Patient Age") +
-    ggtitle("Reports by age")
+    xlab("Patient Age (at report)")
+
 
   print(p)
 })
