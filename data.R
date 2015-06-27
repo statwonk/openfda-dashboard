@@ -8,7 +8,9 @@ count_fda <- function(variable, ...) {
 
   dots <- unlist(list(...))
   validate(
-    need(length(dots) < 5, "Only up to four drugs allowed for now!")
+    need(length(dots) < 5,
+         message = "Only up to four drugs allowed for now!"),
+    errorClass = "too-many-warning"
   )
 
   do.call(rbind,

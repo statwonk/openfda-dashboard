@@ -9,7 +9,9 @@ shinyUI(fluidPage(
              br(),
              sidebarPanel(
                uiOutput("drugs"),
-               actionButton("run_button", label = "Collect data"),
+               actionButton("run_button",
+                            label = "Retrieve data",
+                            class="btn btn-warning"),
                width = 5
              ),
              mainPanel(
@@ -60,6 +62,11 @@ shinyUI(fluidPage(
              includeMarkdown("about2.Rmd")
     )
   ),
-  tags$head(tags$script(src="disqus.js"))
+  tags$head(
+    tags$script(src="disqus.js"),
+    tags$link(rel = "stylesheet",
+              type = "text/css",
+              href = "base.css")
+  )
 ))
 

@@ -4,9 +4,16 @@ author: "Christopher Peters"
 date: "June 26, 2015"
 output: html_document
 ---
-from adverse events related to medicine listed in the API, so I hope you'll agree that public awareness and understanding of the risks associated with medical drugs are a worthy endeavor.
+from adverse events related to medicine listed in the API, so I hope you'll agree that public awareness and understanding of the risks associated with pharmaceuticals are a worthy endeavor.
 
 <i>Note: the FDA <a href="http://www.fda.gov/Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/ucm070461.htm">reports 117,752 deaths in the database in just 2013</a>, so the number above [may even understate the total number of deaths from advese events](https://api.fda.gov/drug/event.json?search=&count=patient.reaction.reactionoutcome).</i>
+
+### Limitations
+
+-  The actual reports are not very standardized, erroneous data are common.
+-  Reports commonly list multiple drugs and multiple reactions, so there is not way to know if a certain drug caused a certain reaction. Here's a highly simplified example of [how reports are filled out](https://open.fda.gov/drug/event/#adverse-event-reports).
+-  The data typically lag by six months, so this isn't recent data.
+-  There's no measure of drugs dispensed, so actual counts reflect some mix of how common a drug is and how often reports are filed.
 
 ### FDA Adverse Event Reporting System (FAERS)
 
@@ -41,3 +48,7 @@ The Rstudio team for <a href="http://shiny.rstudio.com/">their awesome web appli
 -  dplyr [https://github.com/hadley/dplyr](https://github.com/hadley/dplyr)
 -  reshape2 [https://github.com/hadley/reshape](https://github.com/hadley/reshape)
 -  ggthemes [https://github.com/jrnold/ggthemes](https://github.com/jrnold/ggthemes)
+
+### Find a bug?
+
+Please report it here: [https://github.com/statwonk/openfda-dashboard/issues](https://github.com/statwonk/openfda-dashboard/issues)

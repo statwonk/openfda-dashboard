@@ -1,5 +1,5 @@
 output$drugs <- renderUI({
-  selectInput("drug", label = "Drugs (generic names)",
+  selectInput("drug", label = "Choose up to four drugs (generic names)",
               choices = (tbl_df(
                 fda_query("/drug/event.json") %>%
                   fda_count("patient.drug.openfda.generic_name") %>%
