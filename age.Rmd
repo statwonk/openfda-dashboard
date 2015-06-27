@@ -5,4 +5,4 @@ date: "June 26, 2015"
 output: html_document
 ---
 
-The age that patients first experience an event are included in reports. By calculating the percentage of total reports by age, it's possible to see the distribution of reports. Focus on the shape of each curve by drug. Source: <https://open.fda.gov/drug/event/reference/#patient>
+The age that patients first experience an event are included in reports. By calculating the percentage of total reports by age, it's possible to see the distribution of reports. Focus on the shape of each curve by drug. (e.g. **in which age group are adverse events most common?**) Source: <https://open.fda.gov/drug/event/reference/#patient>

@@ -5,4 +5,5 @@ date: "June 26, 2015"
 output: html_document
 ---
 
-The outcome of the reaction or event at the time of last observation. The Federal Drug Administration collects outcomes of six types. Most outcomes are unknown. Some produce a "sequelae," that means a secondary condition was caused by the reaction. Source: <https://open.fda.gov/drug/event/reference/#reactions>
+The outcome of the reaction or event at the time of last observation. The Federal Drug Administration collects outcomes of six types. Consider the distribution of reports (e.g. **what share of adverse events result in death?**) Most outcomes are unknown. Some produce a "sequelae," that means a secondary condition was caused by the reaction. Source: <https://open.fda.gov/drug/event/reference/#reactions>
+
