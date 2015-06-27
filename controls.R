@@ -1,5 +1,5 @@
 output$drugs <- renderUI({
-  selectInput("drug", label = "Drugs",
+  selectInput("drug", label = "Drugs (generic names)",
               choices = (tbl_df(
                 fda_query("/drug/event.json") %>%
                   fda_count("patient.drug.openfda.generic_name") %>%
@@ -7,5 +7,8 @@ output$drugs <- renderUI({
                   fda_exec()) %>%
                   arrange(term) %>%
                   filter(nchar(term) > 4))$term,
-              selected = "oxycodone", multiple = T)
+              selected = c("oxycodone",
+                           "acetaminophen",
+                           "naproxen",
+                           "aspirin"), multiple = T)
 })
