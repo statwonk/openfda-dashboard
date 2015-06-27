@@ -4,7 +4,6 @@ author: "Christopher Peters"
 date: "June 26, 2015"
 output: html_document
 ---
-
 from adverse events related to medicine listed in the API, so I hope you'll agree that public awareness and understanding of the risks associated with medical drugs are a worthy endeavor.
 
 <i>Note: the FDA <a href="http://www.fda.gov/Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/ucm070461.htm">reports 117,752 deaths in the database in just 2013</a>, so the number above [may even understate the total number of deaths from advese events](https://api.fda.gov/drug/event.json?search=&count=patient.reaction.reactionoutcome).</i>
