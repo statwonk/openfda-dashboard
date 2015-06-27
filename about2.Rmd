@@ -38,6 +38,8 @@ for leading the FDA team to publish the OpenFDA API.
 
 The Rstudio team for <a href="http://shiny.rstudio.com/">their awesome web application framework for R</a>, Shiny.
 
+Hadley Wickham, first creator of four of the R packages below.
+
 [Paul H. C. Eilers](http://portal.uc3m.es/portal/page/portal/conocenos/chairs_excellence/chairs_excel_14/paul_eilers) and [Brian D. Marx](http://www.stat.lsu.edu/faculty/marx/) for the Smoothing spline method used on weekly report counts: ["Flexible smoothing with B-splines and penalties"](http://projecteuclid.org/euclid.ss/1038425655)
 
 ### R packages used
