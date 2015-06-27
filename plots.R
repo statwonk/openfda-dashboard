@@ -114,9 +114,10 @@ output$outcome_plot <- renderPlot({
       theme_light(base_size = 20) +
       theme_drug_plots(axis.text.x = element_text(size = 15,
                                                   angle = 15,
-                                                  vjust = 1, hjust = 1)) +
+                                                  vjust = 1, hjust = 1,
+                                                  colour = "black")) +
       ylab("% of outcomes") +
-      xlab("Outcome")
+      xlab("")
 
 
     print(p)

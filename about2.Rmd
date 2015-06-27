@@ -5,11 +5,9 @@ date: "June 26, 2015"
 output: html_document
 ---
 
-from adverse events listed in the API, so it's a very important topic (note: the FDA <a href="http://www.fda.gov/Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/ucm070461.htm">reports 117,752 deaths in the database in just 2013</a>, so the number above may even understate the total number of deaths from advese events).
+from adverse events related to medicine listed in the API, so I hope you'll agree that public awareness and understanding of the risks associated with medical drugs are a worthy endeavor.
 
-```
-https://api.fda.gov/drug/event.json?search=&count=patient.reaction.reactionoutcome
-```
+<i>Note: the FDA <a href="http://www.fda.gov/Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/ucm070461.htm">reports 117,752 deaths in the database in just 2013</a>, so the number above [may even understate the total number of deaths from advese events](https://api.fda.gov/drug/event.json?search=&count=patient.reaction.reactionoutcome).</i>
 
 ### FDA Adverse Event Reporting System (FAERS)
 
@@ -36,4 +34,11 @@ The Rstudio team for <a href="http://shiny.rstudio.com/">their awesome web appli
 
 [Paul H. C. Eilers](http://portal.uc3m.es/portal/page/portal/conocenos/chairs_excellence/chairs_excel_14/paul_eilers) and [Brian D. Marx](http://www.stat.lsu.edu/faculty/marx/) for the Smoothing spline method used on weekly report counts: ["Flexible smoothing with B-splines and penalties"](http://projecteuclid.org/euclid.ss/1038425655)
 
-
+### R packages used
+-  Shiny [https://github.com/rstudio/shiny-server](https://github.com/rstudio/shiny-server)
+-  rOpenSci/openfda [https://github.com/ropenhealth/openfda](https://github.com/ropenhealth/openfda)
+-  ggplot2 [https://github.com/hadley/ggplot2](https://github.com/hadley/ggplot2)
+-  scales [https://github.com/hadley/scales](https://github.com/hadley/scales)
+-  dplyr [https://github.com/hadley/dplyr](https://github.com/hadley/dplyr)
+-  reshape2 [https://github.com/hadley/reshape](https://github.com/hadley/reshape)
+-  ggthemes [https://github.com/jrnold/ggthemes](https://github.com/jrnold/ggthemes)

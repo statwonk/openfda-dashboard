@@ -5,6 +5,12 @@ date: "June 26, 2015"
 output: html_document
 ---
 
-Welcome! My name's Christopher Peters (<a href="https://twitter.com/statwonk">@statwonk</a>) and I'm a professional data scientist at<a href="https://zapier.com"> Zapier</a>. I built this dashboard to help make important drug reaction data accessible to the public.
+**Welcome!** My name's Christopher Peters (<a href="https://twitter.com/statwonk">@statwonk</a>) and I'm a professional data scientist at<a href="https://zapier.com"> Zapier</a>. I built this dashboard to help make important drug reaction data accessible to the public.
 
-There are over:
+Medical drugs help millions live healthier lives daily, but they can also have side-effects. Only you and your doctors can determine if the benefit of taking a drug outweigh the associated risks. The benefits of drugs are commonly sold in television commercials and magazine advertisements, and while ads for drugs are required to list common side-effects they aren't given the same level of attention as benefits.
+
+This dashboard doesn't contain counts of doses for each drug, so it's not possible with this data to understand teh relative risks of drugs presented here. However, it is possible to look at distribution of outcomes of adverse events, see how many people are affected by adverse drugs and the ways they're affected.
+
+My hope is that this dashboard will be a first step to make the FDA's adverse event monitoring data more accessible to the public. If you're interested and able to help develop the dashbaord, checkout its source code: [https://github.com/statwonk/openfda-dashboard](https://github.com/statwonk/openfda-dashboard) all contributions no matter how large or small are welcome.
+
+There are
