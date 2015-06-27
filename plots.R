@@ -7,10 +7,11 @@ theme_drug_plots <- function(...) {
 }
 
 output$reports <- renderPlot({
-  if(is.null(input$run_button))
+  if(is.null(input$run_button) | is.null(input$log_scale))
     return()
   isolate({
-    p <- ggplot(dates_received(),
+    p <- ggplot(tbl_df(dates_received()) %>%
+                  filter(time >= as.POSIXct("2004-01-01 00:00:00")),
                 aes(x = time,
                     y = count,
                     colour = drug)) +
