@@ -14,6 +14,7 @@ from adverse events related to medicine listed in the API, so I hope you'll agre
 -  Reports commonly list multiple drugs and multiple reactions, so there is not way to know if a certain drug caused a certain reaction. Here's a highly simplified example of [how reports are filled out](https://open.fda.gov/drug/event/#adverse-event-reports).
 -  The data typically lag by six months, so this isn't recent data.
 -  There's no measure of drugs dispensed, so actual counts reflect some mix of how common a drug is and how often reports are filed.
+-  This dataset is limited to events that are actually reported, some drugs might be systematically reported more or less often.
 
 ### FDA Adverse Event Reporting System (FAERS)
 
