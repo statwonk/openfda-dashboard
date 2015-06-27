@@ -28,7 +28,7 @@ count_fda <- function(variable, ...) {
 
 
 dates_received <- reactive({
-  if(input$run_button == 0)
+  if(is.null(input$run_button))
     return()
   isolate({
     d <- count_fda(variable = "receivedate",
@@ -71,7 +71,7 @@ dates_received <- reactive({
 })
 
 ages <- reactive({
-  if(input$run_button == 0)
+  if(is.null(input$run_button))
     return()
   isolate({
     count_fda(variable = "patient.patientonsetage",
@@ -80,7 +80,7 @@ ages <- reactive({
 })
 
 outcomes <- reactive({
-  if(is.null(input$drug) | input$run_button == 0)
+  if(is.null(input$run_button))
     return()
   isolate({
     as.data.frame(
@@ -107,7 +107,7 @@ outcomes <- reactive({
 
 
 reactionoutcomes <- reactive({
-  if(input$run_button == 0)
+  if(is.null(input$run_button))
     return()
   isolate({
     dcast(

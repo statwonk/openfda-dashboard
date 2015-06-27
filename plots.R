@@ -7,49 +7,51 @@ theme_drug_plots <- function(...) {
 }
 
 output$reports <- renderPlot({
-  if(input$run_button == 0)
+  if(is.null(input$run_button))
     return()
-  p <- ggplot(dates_received(),
-              aes(x = time,
-                  y = count,
-                  colour = drug)) +
-    geom_point(alpha = 0.5) +
-    geom_smooth(method = 'gam',
-                formula = y ~ s(x,
-                                bs = 'ps'),
-                se = F,
-                size = 2) +
-    scale_color_colorblind(
-      name = "Drug(s)",
-      guide = guide_legend(ncol = 2,
-                           override.aes = list(size = 5))) +
-    scale_x_datetime(breaks = pretty_breaks(10)) +
-    scale_y_continuous(breaks = pretty_breaks(10),
-                       labels = comma) +
-    theme_light(base_size = 20) +
-    theme_drug_plots(axis.text.x = element_text(size = 15,
-                                                angle = 90,
-                                                vjust = 0.5)) +
-    ylab("Adverse Events") +
-    xlab("")
+  isolate({
+    p <- ggplot(dates_received(),
+                aes(x = time,
+                    y = count,
+                    colour = drug)) +
+      geom_point(alpha = 0.5) +
+      geom_smooth(method = 'gam',
+                  formula = y ~ s(x,
+                                  bs = 'ps'),
+                  se = F,
+                  size = 2) +
+      scale_color_colorblind(
+        name = "Drug(s)",
+        guide = guide_legend(ncol = 2,
+                             override.aes = list(size = 5))) +
+      scale_x_datetime(breaks = pretty_breaks(10)) +
+      scale_y_continuous(breaks = pretty_breaks(10),
+                         labels = comma) +
+      theme_light(base_size = 20) +
+      theme_drug_plots(axis.text.x = element_text(size = 15,
+                                                  angle = 90,
+                                                  vjust = 0.5)) +
+      ylab("Adverse Events") +
+      xlab("")
 
 
-  if(input$log_scale) {
-    # http://stackoverflow.com/posts/22227846/revisions
-    base_breaks <- function(n = 10){
-      function(x) {
-        axisTicks(log10(range(x, na.rm = TRUE)), log = TRUE, n = n)
+    if(input$log_scale) {
+      # http://stackoverflow.com/posts/22227846/revisions
+      base_breaks <- function(n = 10){
+        function(x) {
+          axisTicks(log10(range(x, na.rm = TRUE)), log = TRUE, n = n)
+        }
       }
+      p <- p + scale_y_log10(breaks = base_breaks(),
+                             labels = prettyNum)
     }
-    p <- p + scale_y_log10(breaks = base_breaks(),
-                           labels = prettyNum)
-  }
 
-  print(p)
+    print(p)
+  })
 })
 
 output$ages <- renderPlot({
-  if(input$run_button == 0)
+  if(is.null(input$drug) | is.null(input$run_button))
     return()
   isolate({
     d <- ages() %>%
@@ -87,7 +89,7 @@ output$ages <- renderPlot({
 })
 
 output$outcome_plot <- renderPlot({
-  if(input$run_button == 0)
+  if(is.null(input$run_button))
     return()
   isolate({
     d <- tbl_df(
