@@ -5,4 +5,4 @@ date: "June 26, 2015"
 output: html_document
 ---
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+The outcome of the reaction or event at the time of last observation. The Federal Drug Administration collects outcomes of six types. Most outcomes are unknown. Some produce a "sequelae," that means a secondary condition was caused by the reaction. Source: <https://open.fda.gov/drug/event/reference/#reactions>

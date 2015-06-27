@@ -13,18 +13,22 @@ count_fda <- function(variable, ...) {
 
   do.call(rbind,
           lapply(dots, FUN = function(input_drug) {
-            tbl_df(
-              query_drug(input_drug) %>%
-                fda_count(variable) %>%
-                fda_exec()
-            ) %>%
-              mutate(drug = input_drug)
+            tryCatch(
+              tbl_df(
+                query_drug(input_drug) %>%
+                  fda_count(variable) %>%
+                  fda_exec()
+              ) %>%
+                mutate(drug = input_drug),
+              error = function(e) {
+                stop("Oops, API limit hit, please try again shortly!")
+              })
           }))
 }
 
 
 dates_received <- reactive({
-  if(is.null(input$drug))
+  if(is.null(input$drug) | input$run_button == 0)
     return()
 
   d <- count_fda(variable = "receivedate",
@@ -32,8 +36,12 @@ dates_received <- reactive({
 
   d <- d %>%
     mutate(time = as.POSIXct(time,
-                             format = "%Y%m%d"),
-           time = cut.POSIXt(time, 'week',
+                             format = "%Y%m%d"))
+
+  # One possible extention is to add a grouping
+  # toggle like: month, week, day
+  d <- d %>%
+    mutate(time = cut.POSIXt(time, 'week',
                              start.on.monday = F)) %>%
     group_by(drug, time) %>%
     summarise(count = sum(count)) %>%
@@ -62,8 +70,42 @@ dates_received <- reactive({
 })
 
 ages <- reactive({
-  if(is.null(input$drug))
+  if(is.null(input$drug) | input$run_button == 0)
     return()
   count_fda(variable = "patient.patientonsetage",
             input$drug)
+})
+
+outcomes <- reactive({
+  if(is.null(input$drug) | input$run_button == 0)
+    return()
+  as.data.frame(
+    tbl_df(
+      dcast(
+        count_fda(variable = "patient.reaction.reactionoutcome",
+                  input$drug),
+        term ~ drug,
+        value.var = "count"
+      )
+    ) %>%
+      mutate(term = sapply(term, function(x) {
+        switch(x,
+               "Recovered/resolved",
+               "Recovering/resolving",
+               "Not recovered/not resolved",
+               "Recovered/resolved with sequelae",
+               "Fatal",
+               "Unknown")})) %>%
+      rename(Outcome = term)
+  )
+})
+
+
+reactionoutcomes <- reactive({
+  if(is.null(input$drug) | input$run_button == 0)
+    return()
+  dcast(
+    count_fda(variable = "patient.reaction.reactionmeddrapt",
+              input$drug),
+    term ~ drug, value.var = "count")
 })

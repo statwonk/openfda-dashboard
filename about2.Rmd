@@ -1,0 +1,39 @@
+---
+title: "About"
+author: "Christopher Peters"
+date: "June 26, 2015"
+output: html_document
+---
+
+from adverse events listed in the API, so it's a very important topic (note: the FDA <a href="http://www.fda.gov/Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/ucm070461.htm">reports 117,752 deaths in the database in just 2013</a>, so the number above may even understate the total number of deaths from advese events).
+
+```
+https://api.fda.gov/drug/event.json?search=&count=patient.reaction.reactionoutcome
+```
+
+### FDA Adverse Event Reporting System (FAERS)
+
+The <a href="http://www.fda.gov/Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/">FDA FAERS system</a> is a database of adverse events (basically, drug reactions and medication error reports). The FDA uses the database in its post-marketing surveillance program.
+
+### OpenFDA
+
+In early 2014, <a href="https://open.fda.gov/update/introducing-openfda/">the FDA released an API</a> to make adverse event reports, labels, and eforcement reports more accessible.
+
+Previously, these files only existed <a href="http://www.fda.gov/Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/ucm082193.htm">as flat files on the FDA website.</a> If you'd like to access the entirety of the data shown in this dashboard, these files are a good start -- though they generally lag by six months (today (6/27/15), the latest available data is from 2014).
+
+### People who deserve credit
+
+Taha A. Kass-Hout, MD, MS, Chief Health Informatics Officer of FDA
+for leading the FDA team to publish the OpenFDA API.
+-  taha@fda.hhs.gov
+-  [@DrTaha_FDA](https://twitter.com/DrTaha_FDA)
+
+[Contributors](https://github.com/FDA/openfda/graphs/contributors) to the OpenFDA project.
+
+[Contributors](https://github.com/rOpenHealth/openfda/graphs/contributors) to the [rOpenHealth](https://github.com/rOpenHealth) R package for [making working with the API in R a pleasure](https://github.com/ropenhealth/openfda).
+
+The Rstudio team for <a href="http://shiny.rstudio.com/">their awesome web application framework for R</a>, Shiny.
+
+[Paul H. C. Eilers](http://portal.uc3m.es/portal/page/portal/conocenos/chairs_excellence/chairs_excel_14/paul_eilers) and [Brian D. Marx](http://www.stat.lsu.edu/faculty/marx/) for the Smoothing spline method used on weekly report counts: ["Flexible smoothing with B-splines and penalties"](http://projecteuclid.org/euclid.ss/1038425655)
+
+

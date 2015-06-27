@@ -1,0 +1,10 @@
+---
+title: "About"
+author: "Christopher Peters"
+date: "June 26, 2015"
+output: html_document
+---
+
+Welcome! My name's Christopher Peters (<a href="https://twitter.com/statwonk">@statwonk</a>) and I'm a professional data scientist at<a href="https://zapier.com"> Zapier</a>. I built this dashboard to help make important drug reaction data accessible to the public.
+
+There are over:

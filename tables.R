@@ -20,24 +20,47 @@ output$reports_by_week <- renderDataTable({
 output$outcomes <- renderDataTable({
   if(is.null(input$drug))
     return()
-  as.data.frame(
-    dcast(
-      count_fda(variable = "patient.reaction.reactionoutcome",
-                input$drug),
-      term ~ drug,
-      value.var = "count"
-    )
-  )
+  tbl_df(
+    outcomes()) %>%
+    arrange(Outcome)
 }, options = list(searching = FALSE,
                   paging = FALSE,
-                  bLengthChange = I("false")))
+                  bLengthChange = I("false"))
+)
+
+output$outcome_shares <- renderDataTable({
+  if(is.null(input$drug))
+    return()
+  dcast(
+    tbl_df(
+      melt(outcomes(),
+           "Outcome")) %>%
+      group_by(variable) %>%
+      mutate(total_report_count = sum(value),
+             share = value / total_report_count) %>%
+      ungroup %>%
+      mutate(share = percent(share)) %>%
+      select(Outcome, variable, share),
+    Outcome ~ variable,
+    value.var = "share")
+}, options = list(searching = FALSE,
+                  paging = FALSE,
+                  bLengthChange = I("false"))
+)
 
 output$reactions <- renderDataTable({
   if(is.null(input$drug))
     return()
-  dcast(
-    count_fda(variable = "patient.reaction.reactionmeddrapt",
-              input$drug),
-    term ~ drug, value.var = "count")
+  reactionoutcomes()
 }, options = list(searching = FALSE,
                   bLengthChange = I("false")))
+
+output$deaths <- renderText({
+  paste(
+    comma((tbl_df(
+      fda_query("/drug/event.json") %>%
+        fda_count("patient.reaction.reactionoutcome") %>%
+        fda_exec()) %>%
+        filter(term == 5))$count),
+    "deaths")
+})

@@ -1,39 +1,65 @@
 library(shiny)
 shinyUI(fluidPage(
   titlePanel(""),
-  h4("FDA Adverse (Drug) Event Dashboard"), hr(""),
+  h1("FDA Adverse (Drug) Event Dashboard"), hr(""),
   includeMarkdown("welcome.Rmd"),
-  hr(), br(),
-  # http://www.fda.gov/Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/
-  sidebarPanel(
-    uiOutput("drugs"), width = 5
+  hr(),
+  tabsetPanel(
+    tabPanel("Reports",
+             br(),
+             sidebarPanel(
+               uiOutput("drugs"),
+               actionButton("run_button", label = "Collect data"),
+               width = 5
+             ),
+             mainPanel(
+               tabsetPanel(
+                 tabPanel("By age",
+                          h3("Reports by age"),
+                          includeMarkdown("age.Rmd"),
+                          plotOutput("ages")
+                 ),
+                 tabPanel("By outcome",
+                          h3("Reports by outcome"),
+                          includeMarkdown("outcomes.Rmd"),
+                          plotOutput("outcome_plot"),
+                          h4("Share(s) of outcomes"),
+                          dataTableOutput("outcome_shares"),
+                          hr(),
+                          h4("Total count of outcomes"),
+                          dataTableOutput("outcomes")
+                 ),
+                 tabPanel("By reaction",
+                          h3("Count of reports by reaction"),
+                          includeMarkdown("reactions.Rmd"),
+                          dataTableOutput("reactions")
+                 ),
+                 tabPanel("Per week",
+                          h3("Count of reports per week"),
+                          includeMarkdown("reports_by_week.Rmd"),
+                          plotOutput("reports"),
+                          checkboxInput("log_scale",
+                                        "Log y-axis (can clarify trends)",
+                                        value = TRUE),
+                          hr(),
+                          h4("Count of reports per week"),
+                          p("Note: reverse sorted by week, recent weeks first"),
+                          dataTableOutput("reports_by_week")
+                 )
+               ),
+               fluidRow(
+                 hr(),
+                 div(id = "disqus_thread")
+               ),
+               width = 8
+             )
+    ),
+    tabPanel("About", br(),
+             includeMarkdown("about1.Rmd"),
+             textOutput("deaths"), br(),
+             includeMarkdown("about2.Rmd")
+    )
   ),
-
-  mainPanel(
-    fluidRow(
-      h2("Reports by age"),
-      plotOutput("ages"),
-      includeMarkdown("reports_by_week.Rmd")
-    ),
-    h2("Reports per week"),
-    plotOutput("reports"),
-    checkboxInput("log_scale",
-                  "Log y-axis (can clarify trends)",
-                  value = TRUE),
-    hr(),
-    tabsetPanel(
-      tabPanel("Weekly Reports", br(),
-               includeMarkdown("reports_by_week.Rmd"), hr(),
-               p("Note: reverse sorted by week, recent weeks first"),
-               dataTableOutput("reports_by_week")
-      ),
-      tabPanel("Outcomes", br(),
-               includeMarkdown("outcomes.Rmd"),
-               dataTableOutput("outcomes")),
-      tabPanel("Reactions", br(),
-               includeMarkdown("reactions.Rmd"),
-               dataTableOutput("reactions"))
-    ),
-    width = 8
-  )
+  tags$head(tags$script(src="disqus.js"))
 ))
+
