@@ -7,7 +7,7 @@ theme_drug_plots <- function(...) {
 }
 
 output$reports <- renderPlot({
-  if(is.null(input$drug) | input$run_button == 0)
+  if(input$run_button == 0)
     return()
   p <- ggplot(dates_received(),
               aes(x = time,
@@ -49,74 +49,76 @@ output$reports <- renderPlot({
 })
 
 output$ages <- renderPlot({
-  if(is.null(input$drug) | input$run_button == 0)
+  if(input$run_button == 0)
     return()
+  isolate({
+    d <- ages() %>%
+      filter(term < 150) %>%  # sometimes ages are coded wrong like 15,000
+      group_by(drug) %>%
+      mutate(total = sum(count)) %>%
+      ungroup %>%
+      mutate(share = count / total)
 
-  d <- ages() %>%
-    filter(term < 150) %>%  # sometimes ages are coded wrong like 15,000
-    group_by(drug) %>%
-    mutate(total = sum(count)) %>%
-    ungroup %>%
-    mutate(share = count / total)
-
-  p <- ggplot(d,
-              aes(x = term,
-                  y = share,
-                  colour = drug)) +
-    geom_point() +
-    geom_smooth(method = 'gam',
-                formula = y ~ s(x,
-                                bs = 'ps'),
-                se = F,
-                size = 1) +
-    scale_color_colorblind(name = "Drug(s)",
-                           guide = guide_legend(ncol = 2,
-                                                override.aes = list(size = 5))) +
-    scale_x_continuous(breaks = pretty_breaks(10)) +
-    scale_y_continuous(breaks = pretty_breaks(10),
-                       labels = percent) +
-    theme_light(base_size = 20) +
-    theme_drug_plots(axis.text.x = element_text(size = 15),
-                     axis.title.y = element_text(vjust = 0.8)) +
-    ylab("% of reports (by drug)") +
-    xlab("Patient Age (at report)")
+    p <- ggplot(d,
+                aes(x = term,
+                    y = share,
+                    colour = drug)) +
+      geom_point() +
+      geom_smooth(method = 'gam',
+                  formula = y ~ s(x,
+                                  bs = 'ps'),
+                  se = F,
+                  size = 1) +
+      scale_color_colorblind(name = "Drug(s)",
+                             guide = guide_legend(ncol = 2,
+                                                  override.aes = list(size = 5))) +
+      scale_x_continuous(breaks = pretty_breaks(10)) +
+      scale_y_continuous(breaks = pretty_breaks(10),
+                         labels = percent) +
+      theme_light(base_size = 20) +
+      theme_drug_plots(axis.text.x = element_text(size = 15),
+                       axis.title.y = element_text(vjust = 0.8)) +
+      ylab("% of reports (by drug)") +
+      xlab("Patient Age (at report)")
 
 
-  print(p)
+    print(p)
+  })
 })
 
 output$outcome_plot <- renderPlot({
-  if(is.null(input$drug) | input$run_button == 0)
+  if(input$run_button == 0)
     return()
+  isolate({
+    d <- tbl_df(
+      melt(outcomes(),
+           "Outcome")) %>%
+      group_by(variable) %>%
+      mutate(total_report_count = sum(value),
+             share = value / total_report_count) %>%
+      ungroup
 
-  d <- tbl_df(
-    melt(outcomes(),
-         "Outcome")) %>%
-    group_by(variable) %>%
-    mutate(total_report_count = sum(value),
-           share = value / total_report_count) %>%
-    ungroup
-
-  p <- ggplot(
-    data = d,
-    aes(x = Outcome,
-        y = share,
-        fill = factor(variable))) +
-    geom_bar(stat = "identity",
-             position = "dodge") +
-    scale_fill_colorblind(
-      name = "Drug(s)",
-      guide = guide_legend(ncol = 2,
-                           override.aes = list(size = 5))) +
-    scale_y_continuous(breaks = pretty_breaks(10),
-                       labels = percent) +
-    theme_light(base_size = 20) +
-    theme_drug_plots(axis.text.x = element_text(size = 15,
-                                                angle = 15,
-                                                vjust = 1, hjust = 1)) +
-    ylab("% of outcomes") +
-    xlab("Outcome")
+    p <- ggplot(
+      data = d,
+      aes(x = Outcome,
+          y = share,
+          fill = factor(variable))) +
+      geom_bar(stat = "identity",
+               position = "dodge") +
+      scale_fill_colorblind(
+        name = "Drug(s)",
+        guide = guide_legend(ncol = 2,
+                             override.aes = list(size = 5))) +
+      scale_y_continuous(breaks = pretty_breaks(10),
+                         labels = percent) +
+      theme_light(base_size = 20) +
+      theme_drug_plots(axis.text.x = element_text(size = 15,
+                                                  angle = 15,
+                                                  vjust = 1, hjust = 1)) +
+      ylab("% of outcomes") +
+      xlab("Outcome")
 
 
-  print(p)
+    print(p)
+  })
 })
