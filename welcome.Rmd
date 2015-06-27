@@ -1,0 +1,8 @@
+---
+title: "Welcome"
+author: "Christopher Peters"
+date: "June 26, 2015"
+output: html_document
+---
+
+Welcome! This dashboard exposes data collected by the U.S. Food and Drug Administration ("FDA") for the purpose of monitoring safety concerns related to medical drugs and products. You can read more about the  <a href="https://open.fda.gov/">OpenFDA API</a> and the <a href="http://www.fda.gov/Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/">FDA Adverse Event Reporting System "FAERS"</a> here.

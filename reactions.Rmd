@@ -1,0 +1,9 @@
+---
+title: "Reactions"
+author: "Christopher Peters"
+date: "June 26, 2015"
+output: html_document
+---
+
+Below are total counts of reactions by drug. The labels are supposed to follow the MedDRA dictionary for the name of a reaction. In reality, there are many non-standard terms, like `in`, `and`, `of`, etc. There are trade-offs to standarization. Standardization can make analysis easier, but also hide new forms of reactions. The counts below are not very useful in their current form, but I want to share the raw labels to spur discussion on how we might report reactions in more useful ways.
+Source: <https://open.fda.gov/drug/event/reference/#reactions>
