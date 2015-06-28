@@ -1,5 +1,5 @@
 output$reports_by_week <- renderDataTable({
-  if(is.null(input$run_button))
+  if(is.null(input$drug))
     return()
   as.data.frame(
     tbl_df(
@@ -18,7 +18,7 @@ output$reports_by_week <- renderDataTable({
                   bLengthChange = I("false")))
 
 output$outcomes <- renderDataTable({
-  if(is.null(input$run_button))
+  if(is.null(input$drug))
     return()
   tbl_df(
     outcomes()) %>%
@@ -29,7 +29,7 @@ output$outcomes <- renderDataTable({
 )
 
 output$outcome_shares <- renderDataTable({
-  if(is.null(input$run_button))
+  if(is.null(input$drug))
     return()
   dcast(
     tbl_df(
@@ -49,7 +49,7 @@ output$outcome_shares <- renderDataTable({
 )
 
 output$reactions <- renderDataTable({
-  if(is.null(input$run_button))
+  if(is.null(input$drug))
     return()
   reactionoutcomes()
 }, options = list(searching = FALSE,

@@ -7,7 +7,7 @@ theme_drug_plots <- function(...) {
 }
 
 output$reports <- renderPlot({
-  if(is.null(input$run_button) | is.null(input$log_scale))
+  if(is.null(input$drug) | is.null(input$log_scale))
     return()
   isolate({
     p <- ggplot(tbl_df(dates_received()) %>%
@@ -52,7 +52,7 @@ output$reports <- renderPlot({
 })
 
 output$ages <- renderPlot({
-  if(is.null(input$drug) | is.null(input$run_button))
+  if(is.null(input$drug))
     return()
   isolate({
     d <- ages() %>%
@@ -90,7 +90,7 @@ output$ages <- renderPlot({
 })
 
 output$outcome_plot <- renderPlot({
-  if(is.null(input$run_button))
+  if(is.null(input$drug))
     return()
   isolate({
     d <- tbl_df(

@@ -9,9 +9,6 @@ shinyUI(fluidPage(
              br(),
              sidebarPanel(
                uiOutput("drugs"),
-               actionButton("run_button",
-                            label = "Retrieve data",
-                            class="btn btn-warning"),
                width = 5
              ),
              mainPanel(
