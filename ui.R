@@ -13,11 +13,6 @@ shinyUI(fluidPage(
              ),
              mainPanel(
                tabsetPanel(
-                 tabPanel("By age",
-                          h3("Reports by age"),
-                          includeMarkdown("age.Rmd"),
-                          plotOutput("ages")
-                 ),
                  tabPanel("By outcome",
                           h3("Reports by outcome"),
                           includeMarkdown("outcomes.Rmd"),
@@ -44,6 +39,11 @@ shinyUI(fluidPage(
                           h4("Count of reports per week"),
                           p("Note: reverse sorted by week, recent weeks first"),
                           dataTableOutput("reports_by_week")
+                 ),
+                 tabPanel("By age",
+                          h3("Reports by age"),
+                          includeMarkdown("age.Rmd"),
+                          plotOutput("ages")
                  )
                ),
                fluidRow(
