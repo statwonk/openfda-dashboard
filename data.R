@@ -113,7 +113,7 @@ reactionoutcomes <- reactive({
     return()
   isolate({
     dcast(
-      count_fda(variable = "patient.reaction.reactionmeddrapt",
+      count_fda(variable = "patient.reaction.reactionmeddrapt.exact",
                 input$drug),
       term ~ drug, value.var = "count")
   })
