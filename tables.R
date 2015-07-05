@@ -15,7 +15,7 @@ output$reports_by_week <- renderDataTable({
       arrange(desc(Week))
   )
 }, options = list(searching = FALSE,
-                  bLengthChange = I("false")))
+                  LengthChange = I("false")))
 
 output$outcomes <- renderDataTable({
   if(is.null(input$drug))
@@ -25,7 +25,7 @@ output$outcomes <- renderDataTable({
     arrange(Outcome)
 }, options = list(searching = FALSE,
                   paging = FALSE,
-                  bLengthChange = I("false"))
+                  LengthChange = I("false"))
 )
 
 output$outcome_shares <- renderDataTable({
@@ -45,7 +45,7 @@ output$outcome_shares <- renderDataTable({
     value.var = "share")
 }, options = list(searching = FALSE,
                   paging = FALSE,
-                  bLengthChange = I("false"))
+                  LengthChange = I("false"))
 )
 
 output$reactions <- renderDataTable({
@@ -53,7 +53,7 @@ output$reactions <- renderDataTable({
     return()
   reactionoutcomes()
 }, options = list(searching = FALSE,
-                  bLengthChange = I("false")))
+                  LengthChange = I("false")))
 
 output$deaths <- renderText({
   paste(
