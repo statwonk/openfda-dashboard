@@ -28,7 +28,6 @@ count_fda <- function(variable, ...) {
           }))
 }
 
-
 dates_received <- reactive({
   if(is.null(input$run_button))
     return()
@@ -109,12 +108,8 @@ outcomes <- reactive({
 
 
 reactionoutcomes <- reactive({
-  if(is.null(input$run_button))
-    return()
-  isolate({
-    dcast(
-      count_fda(variable = "patient.reaction.reactionmeddrapt.exact",
-                input$drug),
-      term ~ drug, value.var = "count")
-  })
+  dcast(
+    count_fda(variable = "patient.reaction.reactionmeddrapt.exact",
+              input$drug),
+    term ~ drug, value.var = "count")
 })

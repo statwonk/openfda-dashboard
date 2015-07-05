@@ -12,3 +12,9 @@ output$drugs <- renderUI({
                            "naproxen",
                            "aspirin"), multiple = T)
 })
+
+output$data_retrieval_button <- renderUI({
+  actionButton("run_button",
+               label = "Retrieve data",
+               class="btn btn-warning")
+})

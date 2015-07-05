@@ -52,7 +52,7 @@ output$reports <- renderPlot({
 })
 
 output$ages <- renderPlot({
-  if(is.null(input$drug) | is.null(input$run_button))
+  if(is.null(input$run_button))
     return()
   isolate({
     d <- ages() %>%
