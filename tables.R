@@ -1,5 +1,5 @@
 output$reports_by_week <- renderDataTable({
-  if(is.null(input$run_button))
+  if(is.null(input$drug))
     return()
   isolate({
     as.data.frame(
@@ -20,7 +20,7 @@ output$reports_by_week <- renderDataTable({
                   LengthChange = I("false")))
 
 output$outcomes <- renderDataTable({
-  if(is.null(input$run_button))
+  if(is.null(input$drug))
     return()
   isolate({
     tbl_df(
@@ -33,7 +33,7 @@ output$outcomes <- renderDataTable({
 )
 
 output$outcome_shares <- renderDataTable({
-  if(is.null(input$run_button))
+  if(is.null(input$drug))
     return()
   isolate({
     dcast(
@@ -55,7 +55,7 @@ output$outcome_shares <- renderDataTable({
 )
 
 output$reactions <- renderDataTable({
-  if(is.null(input$run_button))
+  if(is.null(input$drug))
     return()
   isolate({
     reactionoutcomes()

@@ -9,7 +9,6 @@ shinyUI(fluidPage(
              br(),
              sidebarPanel(
                uiOutput("drugs"),
-               uiOutput("data_retrieval_button"),
                width = 5
              ),
              mainPanel(
@@ -62,6 +61,7 @@ shinyUI(fluidPage(
   ),
   tags$head(
     tags$script(src="disqus.js"),
+    tags$script("$(function() {$.fn.dataTableExt.errMode = 'none';});"),
     tags$link(rel = "stylesheet",
               type = "text/css",
               href = "base.css")
