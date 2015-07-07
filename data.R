@@ -23,7 +23,7 @@ count_fda <- function(variable, ...) {
               ) %>%
                 mutate(drug = input_drug),
               error = function(e) {
-                stop("Oops, API limit hit, please try again shortly!")
+                stop("Oops, something went wrong!")
               })
           }))
 }
