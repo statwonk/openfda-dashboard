@@ -5,11 +5,11 @@ query_drug <- function(drug) {
 }
 
 count_fda <- function(variable, ...) {
-
   dots <- unlist(list(...))
+
   validate(
-    need(length(dots) < 5,
-         message = "Only up to four drugs allowed for now!"),
+    need(length(dots) <= 6,
+         message = "Only up to six drugs allowed for now!"),
     errorClass = "too-many-warning"
   )
 
