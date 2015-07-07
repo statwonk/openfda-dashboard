@@ -76,7 +76,8 @@ ages <- reactive({
     return()
   isolate({
     count_fda(variable = "patient.patientonsetage",
-              input$drug)
+              input$drug) %>%
+      filter(term < 120)
   })
 })
 

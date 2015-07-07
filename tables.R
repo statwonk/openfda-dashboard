@@ -72,3 +72,52 @@ output$deaths <- renderText({
           filter(term == 5))$count),
       "deaths")
 })
+
+ages_for_table <- reactive({
+  ages() %>%
+    rename(Age = term) %>%
+    mutate(Age = cut(Age,
+                     breaks = seq(0, 120,
+                                  5),
+                     include.lowest = TRUE)) %>%
+    group_by(drug) %>%
+    mutate(total_report_count = sum(count),
+           share = round(count / total_report_count, 4)) %>%
+    ungroup %>%
+    mutate(share = share)
+})
+
+output$age_shares <- renderDataTable({
+  if(is.null(input$drug))
+    return()
+  isolate({
+    tbl_df(
+      dcast(
+        ages_for_table() %>%
+          select(Age, drug, share),
+        Age ~ drug,
+        value.var = "share", fill = 0,
+        fun.aggregate = sum)) %>%
+      mutate_each(funs(percent), -c(1))
+  })
+}, options = list(searching = FALSE,
+                  paging = FALSE,
+                  LengthChange = I("false"))
+)
+
+
+output$ages_counts <- renderDataTable({
+  if(is.null(input$drug))
+    return()
+  isolate({
+    dcast(
+      ages_for_table() %>%
+        select(Age, drug, count),
+      Age ~ drug,
+      value.var = "count", fill = 0,
+      fun.aggregate = sum)
+  })
+}, options = list(searching = FALSE,
+                  paging = FALSE,
+                  LengthChange = I("false"))
+)

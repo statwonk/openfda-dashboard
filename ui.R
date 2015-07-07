@@ -43,7 +43,12 @@ shinyUI(fluidPage(
                  tabPanel("By age",
                           h3("Reports by age"),
                           includeMarkdown("age.Rmd"),
-                          plotOutput("ages")
+                          plotOutput("ages"),
+                          h4("Ages (% by group)"),
+                          dataTableOutput("age_shares"),
+                          hr(),
+                          h4("Total counts of adverse events by age"),
+                          dataTableOutput("ages_counts")
                  )
                ),
                fluidRow(
