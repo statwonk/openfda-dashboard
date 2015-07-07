@@ -64,13 +64,13 @@ output$reactions <- renderDataTable({
                   LengthChange = I("false")))
 
 output$deaths <- renderText({
-    paste(
-      comma((tbl_df(
-        fda_query("/drug/event.json") %>%
-          fda_count("patient.reaction.reactionoutcome") %>%
-          fda_exec()) %>%
-          filter(term == 5))$count),
-      "deaths")
+  paste(
+    comma((tbl_df(
+      fda_query("/drug/event.json") %>%
+        fda_count("patient.reaction.reactionoutcome") %>%
+        fda_exec()) %>%
+        filter(term == 5))$count),
+    "deaths")
 })
 
 ages_for_table <- reactive({
