@@ -1,4 +1,4 @@
-FROM dockr:shiny
+FROM statwonk/shiny
 
 MAINTAINER Christopher Peters "cpeter9@gmail.com"
 
