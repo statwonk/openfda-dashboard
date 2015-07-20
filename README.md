@@ -8,7 +8,7 @@ The United State Food and Drug Administration (FDA) launched a public API Februa
 
 To set up your own instance of the dashboard:
 
-1. [Install Docker](https://github.com/docker/docker#getting-started) (e.g. Ubuntu: `wget -qO- https://get.docker.com/ | sh`)
+1. [Install Docker](https://github.com/docker/docker#getting-started) (e.g. Ubuntu: `sudo apt-get install docker.io`)
 
 For more resources on Docker, checkout: [https://www.docker.com/tryit/](https://www.docker.com/tryit/)
 
