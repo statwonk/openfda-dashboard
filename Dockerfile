@@ -20,3 +20,6 @@ RUN R --no-save -e "library(devtools); \
 RUN cd /srv/shiny-server/ \
     && git clone https://github.com/statwonk/openfda-dashboard.git
 
+EXPOSE 3838
+
+CMD["/usr/bin/shiny-server.sh"]
