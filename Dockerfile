@@ -22,4 +22,4 @@ RUN cd /srv/shiny-server/ \
 
 EXPOSE 3838
 
-CMD["/usr/bin/shiny-server.sh"]
+CMD ["/usr/bin/shiny-server.sh"]
