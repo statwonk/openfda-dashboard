@@ -1,6 +1,8 @@
 output$reports_by_week <- renderDataTable({
-  if(is.null(input$run_button))
-    return()
+  validate(
+    need(input$run_button > 0,
+         'Select some drugs and press the "Retrieve data" button.')
+  )
   isolate({
     as.data.frame(
       tbl_df(
@@ -20,8 +22,10 @@ output$reports_by_week <- renderDataTable({
                   LengthChange = I("false")))
 
 output$outcomes <- renderDataTable({
-  if(is.null(input$run_button))
-    return()
+  validate(
+    need(input$run_button > 0,
+         'Select some drugs and press the "Retrieve data" button.')
+  )
   isolate({
     tbl_df(
       outcomes()) %>%
@@ -33,8 +37,10 @@ output$outcomes <- renderDataTable({
 )
 
 output$outcome_shares <- renderDataTable({
-  if(is.null(input$run_button))
-    return()
+  validate(
+    need(input$run_button > 0,
+         'Select some drugs and press the "Retrieve data" button.')
+  )
   isolate({
     dcast(
       tbl_df(
@@ -55,8 +61,10 @@ output$outcome_shares <- renderDataTable({
 )
 
 output$reactions <- renderDataTable({
-  if(is.null(input$run_button))
-    return()
+  validate(
+    need(input$run_button > 0,
+         'Select some drugs and press the "Retrieve data" button.')
+  )
   isolate({
     reactionoutcomes()
   })
@@ -88,8 +96,10 @@ ages_for_table <- reactive({
 })
 
 output$age_shares <- renderDataTable({
-  if(is.null(input$drug))
-    return()
+  validate(
+    need(input$run_button > 0,
+         'Select some drugs and press the "Retrieve data" button.')
+  )
   isolate({
     tbl_df(
       dcast(
@@ -107,8 +117,10 @@ output$age_shares <- renderDataTable({
 
 
 output$ages_counts <- renderDataTable({
-  if(is.null(input$drug))
-    return()
+  validate(
+    need(input$run_button > 0,
+         'Select some drugs and press the "Retrieve data" button.')
+  )
   isolate({
     dcast(
       ages_for_table() %>%

@@ -7,8 +7,10 @@ theme_drug_plots <- function(...) {
 }
 
 output$reports <- renderPlot({
-  if(is.null(input$run_button) | is.null(input$log_scale))
-    return()
+  validate(
+    need(input$run_button > 0,
+         'Select some drugs and press the "Retrieve data" button.')
+  )
   isolate({
     p <- ggplot(tbl_df(dates_received()) %>%
                   filter(time >= as.POSIXct("2004-01-01 00:00:00")),
@@ -52,8 +54,10 @@ output$reports <- renderPlot({
 })
 
 output$ages <- renderPlot({
-  if(is.null(input$drug) | is.null(input$run_button))
-    return()
+  validate(
+    need(input$run_button > 0,
+         'Select some drugs and press the "Retrieve data" button.')
+  )
   isolate({
     d <- ages() %>%
       filter(term < 150) %>%  # sometimes ages are coded wrong like 15,000
@@ -90,8 +94,10 @@ output$ages <- renderPlot({
 })
 
 output$outcome_plot <- renderPlot({
-  if(is.null(input$run_button))
-    return()
+  validate(
+    need(input$run_button > 0,
+         'Select some drugs and press the "Retrieve data" button.')
+  )
   isolate({
     d <- tbl_df(
       melt(outcomes(),

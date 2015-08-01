@@ -10,7 +10,12 @@ count_fda <- function(variable, ...) {
   validate(
     need(length(dots) <= 6,
          message = "Only up to six drugs allowed for now!"),
-    errorClass = "too-many-warning"
+    errorClass = "too-many-error"
+  )
+  validate(
+    need(length(dots) > 0,
+         message = "Please select at least one drug."),
+    errorClass = "too-little-error"
   )
 
   do.call(rbind,
@@ -29,9 +34,6 @@ count_fda <- function(variable, ...) {
 }
 
 dates_received <- reactive({
-  if(is.null(input$run_button))
-    return()
-  isolate({
     d <- count_fda(variable = "receivedate",
                    input$drug)
 
@@ -68,23 +70,15 @@ dates_received <- reactive({
     #     mutate(count = ifelse(is.na(count), 0, count))
 
     return(d)
-  })
 })
 
 ages <- reactive({
-  if(is.null(input$run_button))
-    return()
-  isolate({
     count_fda(variable = "patient.patientonsetage",
               input$drug) %>%
       filter(term < 120)
-  })
 })
 
 outcomes <- reactive({
-  if(is.null(input$run_button))
-    return()
-  isolate({
     as.data.frame(
       tbl_df(
         dcast(
@@ -104,17 +98,11 @@ outcomes <- reactive({
                  "Unknown")})) %>%
         rename(Outcome = term)
     )
-  })
 })
 
-
 reactionoutcomes <- reactive({
-  if(is.null(input$run_button))
-    return()
-  isolate({
     dcast(
       count_fda(variable = "patient.reaction.reactionmeddrapt.exact",
                 input$drug),
       term ~ drug, value.var = "count")
-  })
 })
