@@ -17,8 +17,9 @@ RUN R --no-save -e "library(devtools); \
                     install_github('hadley/dplyr'); \
                     install_github('statwonk/openfda');"
 
-RUN cd /srv/shiny-server/ \
-    && git clone https://github.com/statwonk/openfda-dashboard.git
+RUN rm -rf /srv/shiny-server/* \
+    && cd /srv/shiny-server/ \
+    && git clone https://github.com/statwonk/openfda-dashboard.git .
 
 EXPOSE 3838
 
