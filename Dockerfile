@@ -4,6 +4,7 @@ MAINTAINER Christopher Peters "cpeter9@gmail.com"
 
 RUN apt-get update && apt-get install -y \
     libssl-dev \
+    ca-certificates \
     libxml2-dev
 
 RUN R --no-save -e "install.packages(c('devtools'), \
